@@ -7,7 +7,7 @@ Brown University
 import tensorflow as tf
 import hyperparameters as hp
 from tensorflow.keras.layers import \
-        Conv2D, MaxPool2D, Dropout, Flatten, Dense
+        Conv2D, MaxPool2D, Dropout, Flatten, Dense, ReLU
 
 
 class Model(tf.keras.Model):
@@ -25,16 +25,19 @@ class Model(tf.keras.Model):
         # we can adjust these filter numbers
         self.architecture = [
             Conv2D(32, 3, 1, padding='same', activation="relu"),
-            Conv2D(32, 3, 1, padding='same', activation="relu"),
+            Conv2D(32, 3, 1, padding='same'),
             MaxPool2D(2),
+            ReLU(),
 
             Conv2D(64, 3, 1, padding='same', activation="relu"),
-            Conv2D(64, 3, 1, padding='same', activation="relu"),
+            Conv2D(64, 3, 1, padding='same'),
             MaxPool2D(2),
+            ReLU(),
 
             Dropout(0.3),
+            # insert localization network here
             Flatten(),
-            #insert localization network here
+
             Dense(50, activation='relu'),
             Dense(7, activation="softmax")
         ]
