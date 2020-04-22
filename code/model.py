@@ -21,6 +21,8 @@ class Model(tf.keras.Model):
             learning_rate=hp.learning_rate,
             momentum=hp.momentum)
 
+        # they used 3x3x10 kernels, so we need to make sure the input is passed in with 10 channels.
+        # we can adjust these filter numbers
         self.architecture = [
             Conv2D(32, 3, 1, padding='same', activation="relu"),
             Conv2D(32, 3, 1, padding='same', activation="relu"),
@@ -30,13 +32,11 @@ class Model(tf.keras.Model):
             Conv2D(64, 3, 1, padding='same', activation="relu"),
             MaxPool2D(2),
 
-            Conv2D(128, 3, 1, padding='same', activation="relu"),
-            Conv2D(128, 3, 1, padding='same', activation="relu"),
-            MaxPool2D(2),
             Dropout(0.3),
             Flatten(),
-            Dense(128, activation='relu'),
-            Dense(15, activation="softmax")
+            #insert localization network here
+            Dense(50, activation='relu'),
+            Dense(7, activation="softmax")
         ]
 
         # ====================================================================
