@@ -29,9 +29,7 @@ def parse_args():
         help='''Path to model checkpoint file (should end with the
         extension .h5). Checkpoints are automatically saved when you
         train your model. If you want to continue training from where
-        you left off, this is how you would load your weights. In
-        the case of task 2, passing a checkpoint path will disable
-        the loading of VGG weights.''')
+        you left off, this is how you would load your weights. ''')
     parser.add_argument(
         '--confusion',
         action='store_true',
