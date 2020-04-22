@@ -17,7 +17,7 @@ class Model(tf.keras.Model):
         super(Model, self).__init__()
 
         # Optimizer
-        self.optimizer = tf.keras.optimizers.RMSprop(
+        self.optimizer = tf.keras.optimizers.Adam(
             learning_rate=hp.learning_rate,
             momentum=hp.momentum)
 
