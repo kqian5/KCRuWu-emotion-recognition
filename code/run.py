@@ -6,6 +6,7 @@ Brown University
 
 import os
 import argparse
+import numpy as np
 import tensorflow as tf
 from model import Model
 import hyperparameters as hp
@@ -21,8 +22,8 @@ def parse_args():
         description="Let's train some neural nets!")
     parser.add_argument(
         '--data',
-        default=os.getcwd() + '/../data/',
-        help='Location where the dataset is stored.')
+        default='fer',
+        help='Image datasets to build model on')
     parser.add_argument(
         '--load-checkpoint',
         default=None,
@@ -96,10 +97,19 @@ def test(model, datasets):
 def main():
     """ Main function. """
 
-    datasets = Datasets(ARGS.data, ARGS.task)
+    # Map datasets to its path
+    datasets_path_dict = {
+                            'fer', os.getcwd() + '/../data/fer.csv'
+                        }
+
+    datasets = Datasets(datasets_path_dict[ARGS.data], ARGS.data)
 
     model = Model()
-    model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
+    
+    # Different model input size depending on the dataset. Default is fer2013.
+    if ARGS.data is 'fer':
+        model(tf.keras.Input(shape=(hp.img_size, hp.img_size)))
+
     checkpoint_path = "./your_model_checkpoints/"
     model.summary()
 

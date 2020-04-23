@@ -33,11 +33,15 @@ class Datasets():
         self.std = np.ones((3,))
         self.calc_mean_and_std()
 
-        # Setup data generators
-        self.train_data = self.get_data(
-            os.path.join(self.data_path, "train/"), task == '2', True, True)
-        self.test_data = self.get_data(
-            os.path.join(self.data_path, "test/"), task == '2', False, False)
+        # Map datasets to its own get_data function
+        get_data_dict = {
+                            'fer': get_fer_data,
+                        }
+        
+        # Get train_x, train_y, val_x, val_y, test_x, test_y
+        datasets = get_data_dict[task](data_path, True)
+        (self.train_x, self.train_y, self.val_x, self.val_y, self.test_x, self.test_y) = datasets
+
 
     def calc_mean_and_std(self):
         """ Calculate mean and standard deviation of a sample of the
