@@ -10,7 +10,7 @@ import numpy as np
 import tensorflow as tf
 from model import Model
 import hyperparameters as hp
-from preprocess import Datasets
+from pp import Datasets
 from tensorboard_utils import ImageLabelingLogger, ConfusionMatrixLogger
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -99,7 +99,8 @@ def main():
 
     # Map datasets to its path
     datasets_path_dict = {
-                            'fer', os.getcwd() + '/../data/fer.csv'
+                            'fer': 'C:\\Users\\kycqi\\Documents\\Brown\\Spring 2020\\cs143\\final\\KCRuWu-emotion-recognition\\data\\fer2013.csv'
+                            # 'fer': os.getcwd() + '\\..\\data\\fer.csv'
                         }
 
     datasets = Datasets(datasets_path_dict[ARGS.data], ARGS.data)

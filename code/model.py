@@ -17,9 +17,11 @@ class Model(tf.keras.Model):
         super(Model, self).__init__()
 
         # Optimizer
+        # self.optimizer = tf.keras.optimizers.Adam(
+        #     learning_rate=hp.learning_rate,
+        #     momentum=hp.momentum)
         self.optimizer = tf.keras.optimizers.Adam(
-            learning_rate=hp.learning_rate,
-            momentum=hp.momentum)
+            learning_rate=hp.learning_rate)
 
         # they used 3x3x10 kernels, so we need to make sure the input is passed in with 10 channels.
         # we can adjust these filter numbers
