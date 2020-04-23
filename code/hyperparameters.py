@@ -6,10 +6,10 @@ Brown University
 
 # Resize image size for task 1. Task 2 must have an image size of 224,
 # so that is hard coded in elsewhere.
-img_size = 224
+img_size = 49
 
-# The number of image scene classes. Don't change this.
-category_num = 15
+# The number of emotions (0=Angry, 1=Disgust, 2=Fear, 3=Happy, 4=Sad, 5=Surprise, 6=Neutral).
+category_num = 7
 
 # Sample size for calculating the mean and standard deviation of the
 # training data. This many images will be randomly seleted to be read

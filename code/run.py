@@ -60,30 +60,37 @@ def train(model, datasets, checkpoint_path):
         tf.keras.callbacks.TensorBoard(
             update_freq='batch',
             profile_batch=0),
-        ImageLabelingLogger(datasets)
+        # ImageLabelingLogger(datasets)
     ]
 
     # Include confusion logger in callbacks if flag set
-    if ARGS.confusion:
-        callback_list.append(ConfusionMatrixLogger(datasets))
+    # if ARGS.confusion:
+    #     callback_list.append(ConfusionMatrixLogger(datasets))
 
     # Begin training
     model.fit(
-        x=datasets.train_data,
-        validation_data=datasets.test_data,
+        x=datasets.train_x,
+        y=datasets.train_y,
+        validation_data=(datasets.val_x, datasets.val_y),
         epochs=hp.num_epochs,
         batch_size=None,
         callbacks=callback_list,
     )
 
-def test(model, test_data):
-    """ Testing routine. """
+def test(model, datasets):
+    """ Testing routine. Also returns accuracy """
 
     # Run model on test set
     model.evaluate(
-        x=test_data,
+        x=datasets.test_x,
+        y=datasets.test_y,
         verbose=1,
     )
+    
+    # calculate prediction accuracy
+    prediction = model.predict(datasets.test_x)
+    correct = np.sum(prediction == datasets.test_y)
+    return correct / len(prediction)
 
 
 def main():
@@ -108,10 +115,11 @@ def main():
         loss=model.loss_fn,
         metrics=["sparse_categorical_accuracy"])
 
-    if ARGS.evaluate:
-        test(model, datasets.test_data)
-    else:
+    if not ARGS.evaluate:
         train(model, datasets, checkpoint_path)
+    
+    accuracy = test(model, datasets.test_data)
+    print("Accuracy: ", accuracy)
 
 # Make arguments global
 ARGS = parse_args()
