@@ -69,6 +69,7 @@ def train(model, datasets, checkpoint_path):
     #     callback_list.append(ConfusionMatrixLogger(datasets))
 
     # Begin training
+    print(train_x.shape)
     model.fit(
         x=datasets.train_x,
         y=datasets.train_y,
@@ -129,7 +130,7 @@ def main():
     if not ARGS.evaluate:
         train(model, datasets, checkpoint_path)
     
-    accuracy = test(model, datasets.test_data)
+    accuracy = test(model, datasets)
     print("Accuracy: ", accuracy)
 
 # Make arguments global

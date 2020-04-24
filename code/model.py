@@ -26,7 +26,7 @@ class Model(tf.keras.Model):
         # they used 3x3x10 kernels, so we need to make sure the input is passed in with 10 channels.
         # we can adjust these filter numbers
         self.architecture = [
-            Conv2D(32, 3, 1, padding='same', activation="relu"),
+            Conv2D(32, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same', activation="relu"),
             Conv2D(32, 3, 1, padding='same'),
             MaxPool2D(2),
             ReLU(),
@@ -50,6 +50,7 @@ class Model(tf.keras.Model):
         """ Passes input image through the network. """
 
         for layer in self.architecture:
+            print(img.shape)
             img = layer(img)
 
         return img

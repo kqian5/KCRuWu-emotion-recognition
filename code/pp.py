@@ -15,7 +15,7 @@ class Datasets():
             x, y = [], []
             for row in csv_reader:
                 emotion = row[0]
-                pixels = np.array(row[1].split(' ')).reshape((hp.img_size, hp.img_size))
+                pixels = np.array(row[1].split(' ')).reshape((hp.img_size, hp.img_size, 1))
                 x.append(pixels)
                 y.append(emotion)
             num_examples = csv_reader.line_num - 1
