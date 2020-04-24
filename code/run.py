@@ -83,15 +83,13 @@ def test(model, datasets):
     """ Testing routine. Also returns accuracy """
 
     # Run model on test set
-    model.evaluate(
+    print('\n# Evaluate on test data')
+    results = model.evaluate(
         x=datasets.test_x,
         y=datasets.test_y,
         verbose=1,
     )
-    
-    print('Model predic on testing set')
-    model.predict(datasets.test_x)
-
+    print('test loss, test acc:', results)
 
 def main():
     """ Main function. """
@@ -127,8 +125,7 @@ def main():
     if not ARGS.evaluate:
         train(model, datasets, checkpoint_path)
     
-    accuracy = test(model, datasets)
-    print("Accuracy: ", accuracy)
+    test(model, datasets)
 
 # Make arguments global
 ARGS = parse_args()
