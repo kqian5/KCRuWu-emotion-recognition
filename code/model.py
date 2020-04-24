@@ -50,7 +50,7 @@ class Model(tf.keras.Model):
         """ Passes input image through the network. """
 
         for layer in self.architecture:
-            print(img.shape)
+            # print(img.shape)
             img = layer(img)
 
         return img

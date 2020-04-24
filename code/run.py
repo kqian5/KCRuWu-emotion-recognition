@@ -89,10 +89,8 @@ def test(model, datasets):
         verbose=1,
     )
     
-    # calculate prediction accuracy
-    prediction = model.predict(datasets.test_x)
-    correct = np.sum(prediction == datasets.test_y)
-    return correct / len(prediction)
+    print('Model predic on testing set')
+    model.predict(datasets.test_x)
 
 
 def main():
