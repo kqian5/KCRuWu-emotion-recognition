@@ -34,7 +34,7 @@ class Datasets():
         
         # Get train_x, train_y, val_x, val_y, test_x, test_y
         datasets = get_data_dict[task](data_path, True)
-        (train_x, train_y, val_x, val_y, test_x, test_y) = datasets
+        (self.train_x, self.train_y, self.val_x, self.val_y, self.test_x, self.test_y) = datasets
         print('preprocessing complete')
 
 

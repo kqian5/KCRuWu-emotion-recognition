@@ -69,7 +69,7 @@ def train(model, datasets, checkpoint_path):
     #     callback_list.append(ConfusionMatrixLogger(datasets))
 
     # Begin training
-    print(train_x.shape)
+    print(datasets.train_x.shape)
     model.fit(
         x=datasets.train_x,
         y=datasets.train_y,
