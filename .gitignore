@@ -1,2 +1,4 @@
 data/*
-code/__pycache__/*
+__pycache__
+code/logs/
+code/your_model_checkpoints/
