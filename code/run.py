@@ -69,7 +69,7 @@ def train(model, datasets, checkpoint_path):
     #     callback_list.append(ConfusionMatrixLogger(datasets))
 
     # Begin training
-    print(datasets.train_x.shape)
+    # print(datasets.train_x.shape)
     model.fit(
         x=datasets.train_x,
         y=datasets.train_y,
@@ -100,8 +100,7 @@ def main():
 
     # Map datasets to its path
     datasets_path_dict = {
-                            'fer': 'C:\\Users\\kycqi\\Documents\\Brown\\Spring 2020\\cs143\\final\\KCRuWu-emotion-recognition\\data\\fer2013.csv'
-                            # 'fer': os.getcwd() + '\\..\\data\\fer.csv'
+                            'fer': os.getcwd() + '/../data/fer2013.csv'
                         }
 
     datasets = Datasets(datasets_path_dict[ARGS.data], ARGS.data)
