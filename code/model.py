@@ -33,8 +33,8 @@ class Model(tf.keras.Model):
 			MaxPool2D(2),
 			ReLU(),
 
-			Conv2D(64, 3, 1, padding='same', activation="relu"),
-			Conv2D(64, 3, 1, padding='same'),
+			Conv2D(32, 3, 1, padding='same', activation="relu"),
+			Conv2D(32, 3, 1, padding='same'),
 			MaxPool2D(2),
 			ReLU(),
 
@@ -46,15 +46,15 @@ class Model(tf.keras.Model):
 			MaxPool2D(2),
 			ReLU(),
 
-			Conv2D(64, 3, 1, padding='same'),
+			Conv2D(32, 3, 1, padding='same'),
 			MaxPool2D(2),
 			ReLU(),
 
 			Dense(32, activation='relu'),
 			Dense(32),
-
-			AffineLayer(),
 		]
+
+		self.affine = AffineLayer()
 
 		self.multiply = Multiply()
 
@@ -72,20 +72,20 @@ class Model(tf.keras.Model):
 
 		vanilla_out = img
 		for layer in self.vanilla:
-			# print(img.shape)
 			vanilla_out = layer(vanilla_out)
 
 		localization_out = img
 		for layer in self.localization:
-			# print(img.shape)
 			localization_out = layer(localization_out)
 
-		both = self.multiply(vanilla_out, localization_out)
+		affine_transformation_layer = self.affine(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
+
+		transformed_vanilla = affine_transformation_layer(vanilla_out)
 
 		for layer in self.head:
-			both = layer(both)
+			transformed_vanilla = layer(transformed_vanilla)
 
-		return both
+		return transformed_vanilla
 
 	@staticmethod
 	def loss_fn(labels, predictions):
