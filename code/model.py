@@ -30,19 +30,19 @@ class Model(tf.keras.Model):
 		# they used 3x3x10 kernels, so we need to make sure the input is passed in with 10 channels.
 		# we can adjust these filter numbers
 
-		self.vanilla = [
-			Conv2D(64, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same', activation="relu"),
-			Conv2D(64, 3, 1, padding='same'),
-			MaxPool2D(2),
-			ReLU(),
+		# self.vanilla = [
+		# 	Conv2D(64, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same', activation="relu"),
+		# 	Conv2D(64, 3, 1, padding='same'),
+		# 	MaxPool2D(2),
+		# 	ReLU(),
 
-			Conv2D(64, 3, 1, padding='same', activation="relu"),
-			Conv2D(64, 3, 1, padding='same'),
-			MaxPool2D(2),
-			ReLU(),
+		# 	Conv2D(64, 3, 1, padding='same', activation="relu"),
+		# 	Conv2D(64, 3, 1, padding='same'),
+		# 	MaxPool2D(2),
+		# 	ReLU(),
 
-			Dropout(0.3)
-		]
+		# 	Dropout(0.3)
+		# ]
 
 		self.localization = [
 			Conv2D(32, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same'),
