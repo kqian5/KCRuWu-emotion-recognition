@@ -81,9 +81,7 @@ class Model(tf.keras.Model):
 		localization_out = img
 		for layer in self.localization:
 			localization_out = layer(localization_out)
-        
-        out = transformer(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
-
+        out = transformer(img, tf.reshape(localization_out, shape=(-1, 6)))
 		# affine_transformation_layer = self.affine(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
 
 		# transformed_vanilla = affine_transformation_layer(vanilla_out)
