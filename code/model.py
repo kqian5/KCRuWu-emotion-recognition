@@ -76,6 +76,7 @@ class Model(tf.keras.Model):
 		# for layer in self.vanilla:
 		# 	vanilla_out = layer(vanilla_out)
 		#       return vanilla_out
+		print("call")
 		print(img.shape)
 		localization_out = img
 		for layer in self.localization:
