@@ -30,19 +30,19 @@ class Model(tf.keras.Model):
 		# they used 3x3x10 kernels, so we need to make sure the input is passed in with 10 channels.
 		# we can adjust these filter numbers
 
-		# self.vanilla = [
-		# 	Conv2D(32, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same', activation="relu"),
-		# 	Conv2D(32, 3, 1, padding='same'),
-		# 	MaxPool2D(2),
-		# 	ReLU(),
+		self.vanilla = [
+			Conv2D(64, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same', activation="relu"),
+			Conv2D(64, 3, 1, padding='same'),
+			MaxPool2D(2),
+			ReLU(),
 
-		# 	Conv2D(32, 3, 1, padding='same', activation="relu"),
-		# 	Conv2D(32, 3, 1, padding='same'),
-		# 	MaxPool2D(2),
-		# 	ReLU(),
+			Conv2D(64, 3, 1, padding='same', activation="relu"),
+			Conv2D(64, 3, 1, padding='same'),
+			MaxPool2D(2),
+			ReLU(),
 
-		# 	Dropout(0.3)
-		# ]
+			Dropout(0.3)
+		]
 
 		self.localization = [
 			Conv2D(32, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same'),
@@ -54,7 +54,7 @@ class Model(tf.keras.Model):
 			ReLU(),
 
 			Dense(32, activation='relu'),
-			Dense(32),
+			Dense(6),
 		]
 
 		# self.affine = AffineLayer()
@@ -75,12 +75,13 @@ class Model(tf.keras.Model):
 		# vanilla_out = img
 		# for layer in self.vanilla:
 		# 	vanilla_out = layer(vanilla_out)
-		#       return vanilla_out
-		print("call")
+		# out = vanilla_out
 		localization_out = img
 		for layer in self.localization:
 		    localization_out = layer(localization_out)
-		out = transformer(tf.reshape(img, shape=(1, 48, 48, 1)), tf.reshape(localization_out, shape=(-1, 6)))
+		print("localization")
+		print(localization_out.shape)
+		out = transformer(tf.reshape(img, shape=(32, 48, 48, 1)), tf.reshape(localization_out, shape=(-1, 6)))
 		# affine_transformation_layer = self.affine(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
 		print(out.shape)
 		# transformed_vanilla = affine_transformation_layer(vanilla_out)
