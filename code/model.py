@@ -48,53 +48,14 @@ class Model(tf.keras.Model):
 			Dense(7, activation="softmax")
 		]
 
-		self.localization = [
-			Conv2D(32, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same'),
-			MaxPool2D(2),
-			ReLU(),
-
-			Conv2D(32, 3, 1, padding='same'),
-			MaxPool2D(2),
-			ReLU(),
-		]
-
-		self.loc_fc = [
-			Dense(32, activation='relu'),
-			Dense(32),
-		]
-
-		# self.multiply = Multiply()
-
-		self.head = [
-
-			# insert localization network here
-			
-		]
 
 	def call(self, img):
 		""" Passes input image through the network. """
-		img = tf.convert_to_tensor(img)
-		localization_out = img
-		for layer in self.localization:
-			localization_out = layer(localization_out)
 
-		for layer in self.loc_fc:
-			localization_out = layer(localization_out)
-
-		# using kevinzakka's transformer
-		# x = spatial_transformer_network(img, localization_out)
-
-		# using tensorlayer's transformer
-		x = transformer(img, localization_out, (48,48))
-		x = tf.reshape(x, tf.shape(img))
-
-		print(x.shape)
-		print('finished attention part')
-		output = x
 		for layer in self.architecture:
-			output = layer(output)
+			img = layer(img)
 
-		return output
+		return img
 
 	@staticmethod
 	def loss_fn(labels, predictions):
