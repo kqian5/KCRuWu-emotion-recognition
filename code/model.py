@@ -80,7 +80,7 @@ class Model(tf.keras.Model):
 		# print(out.shape)
 		# # transformed_vanilla = affine_transformation_layer(vanilla_out)
 		print(img.shape)
-		t_model = self.transformer()
+		t_model = self.transformer
 		out = t_model.call(img)
 		print(out.shape)
 		for layer in self.head:
