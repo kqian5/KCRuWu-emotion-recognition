@@ -9,6 +9,9 @@ import hyperparameters as hp
 from tensorflow.keras.layers import \
 	Conv2D, MaxPool2D, Dropout, Flatten, Dense, ReLU, Multiply
 from AffineLayer import AffineLayer
+from SpatialTransformLayer import DefaultLocalizationNetwork
+from SpatialTransformLayer import SpatialTransformLayer
+from transformer import spatial_transformer_network as transformer
 
 
 class Model(tf.keras.Model):
@@ -54,9 +57,9 @@ class Model(tf.keras.Model):
 			Dense(32),
 		]
 
-		self.affine = AffineLayer()
+		# self.affine = AffineLayer()
 
-		self.multiply = Multiply()
+		# self.multiply = Multiply()
 
 		self.head = [
 
@@ -70,22 +73,25 @@ class Model(tf.keras.Model):
 	def call(self, img):
 		""" Passes input image through the network. """
 
-		vanilla_out = img
-		for layer in self.vanilla:
-			vanilla_out = layer(vanilla_out)
+		# vanilla_out = img
+		# for layer in self.vanilla:
+		# 	vanilla_out = layer(vanilla_out)
+  #       return vanilla_out
 
 		localization_out = img
 		for layer in self.localization:
 			localization_out = layer(localization_out)
 
-		affine_transformation_layer = self.affine(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
+        out = transformer(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
 
-		transformed_vanilla = affine_transformation_layer(vanilla_out)
+		# affine_transformation_layer = self.affine(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
+
+		# transformed_vanilla = affine_transformation_layer(vanilla_out)
 
 		for layer in self.head:
-			transformed_vanilla = layer(transformed_vanilla)
+			out = layer(out)
 
-		return transformed_vanilla
+		return out
 
 	@staticmethod
 	def loss_fn(labels, predictions):
