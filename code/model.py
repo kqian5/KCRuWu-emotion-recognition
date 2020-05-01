@@ -1,9 +1,3 @@
-"""
-Project 4 - CNNs
-CS1430 - Computer Vision
-Brown University
-"""
-
 import tensorflow as tf
 import hyperparameters as hp
 from tensorflow.keras.layers import \
@@ -86,6 +80,7 @@ class Model(tf.keras.Model):
 		# print(out.shape)
 		# # transformed_vanilla = affine_transformation_layer(vanilla_out)
 		out = self.transformer(img)
+		print(out.shape)
 		for layer in self.head:
 		    out = layer(out)
 		return out
