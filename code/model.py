@@ -65,7 +65,7 @@ class Model(tf.keras.Model):
 
 	def call(self, img):
 		""" Passes input image through the network. """
-		print(img.shape)
+		img = tf.convert_to_tensor(img)
 		vanilla_out = img
 		for layer in self.vanilla:
 			vanilla_out = layer(vanilla_out)
