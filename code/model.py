@@ -9,6 +9,7 @@ import hyperparameters as hp
 from tensorflow.keras.layers import \
 	Conv2D, MaxPool2D, Dropout, Flatten, Dense, ReLU, Multiply
 from AffineLayer import AffineLayer
+from transformer import spatial_transformer_network
 
 
 class Model(tf.keras.Model):
@@ -27,7 +28,7 @@ class Model(tf.keras.Model):
 		# they used 3x3x10 kernels, so we need to make sure the input is passed in with 10 channels.
 		# we can adjust these filter numbers
 
-		self.vanilla = [
+		self.architecture = [
 			Conv2D(32, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same', activation="relu"),
 			Conv2D(32, 3, 1, padding='same'),
 			MaxPool2D(2),
@@ -38,7 +39,12 @@ class Model(tf.keras.Model):
 			MaxPool2D(2),
 			ReLU(),
 
-			Dropout(0.3)
+			Dropout(0.3),
+			
+			Flatten(),
+
+			Dense(50),
+			Dense(7, activation="softmax")
 		]
 
 		self.localization = [
@@ -49,43 +55,40 @@ class Model(tf.keras.Model):
 			Conv2D(32, 3, 1, padding='same'),
 			MaxPool2D(2),
 			ReLU(),
+		]
 
+		self.loc_fc = [
 			Dense(32, activation='relu'),
 			Dense(32),
 		]
 
-		self.affine = AffineLayer()
-
-		self.multiply = Multiply()
+		# self.multiply = Multiply()
 
 		self.head = [
 
 			# insert localization network here
-			Flatten(),
-
-			Dense(50),
-			Dense(7, activation="softmax")
+			
 		]
 
 	def call(self, img):
 		""" Passes input image through the network. """
-
-		vanilla_out = img
-		for layer in self.vanilla:
-			vanilla_out = layer(vanilla_out)
-
+		img = tf.convert_to_tensor(img)
 		localization_out = img
 		for layer in self.localization:
 			localization_out = layer(localization_out)
 
-		affine_transformation_layer = self.affine(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
+		for layer in self.loc_fc:
+			localization_out = layer(localization_out)
 
-		transformed_vanilla = affine_transformation_layer(vanilla_out)
+		x = spatial_transformer_network(img, localization_out)
 
-		for layer in self.head:
-			transformed_vanilla = layer(transformed_vanilla)
+		print(x.shape)
+		print('finished attention part')
+		output = x
+		for layer in self.architecture:
+			output = layer(output)
 
-		return transformed_vanilla
+		return output
 
 	@staticmethod
 	def loss_fn(labels, predictions):
