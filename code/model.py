@@ -10,6 +10,7 @@ from tensorflow.keras.layers import \
 	Conv2D, MaxPool2D, Dropout, Flatten, Dense, ReLU, Multiply
 from AffineLayer import AffineLayer
 from transformer import spatial_transformer_network
+from tensorlayer.layers import transformer
 
 
 class Model(tf.keras.Model):
@@ -40,7 +41,7 @@ class Model(tf.keras.Model):
 			ReLU(),
 
 			Dropout(0.3),
-			
+
 			Flatten(),
 
 			Dense(50),
@@ -80,7 +81,12 @@ class Model(tf.keras.Model):
 		for layer in self.loc_fc:
 			localization_out = layer(localization_out)
 
-		x = spatial_transformer_network(img, localization_out)
+		# using kevinzakka's transformer
+		# x = spatial_transformer_network(img, localization_out)
+
+		# using tensorlayer's transformer
+		x = transformer(img, localization_out, (48,48))
+		x = tf.reshape(x, tf.shape(img))
 
 		print(x.shape)
 		print('finished attention part')
