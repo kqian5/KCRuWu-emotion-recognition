@@ -79,7 +79,9 @@ class Model(tf.keras.Model):
 		# # affine_transformation_layer = self.affine(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
 		# print(out.shape)
 		# # transformed_vanilla = affine_transformation_layer(vanilla_out)
-		out = self.transformer(img)
+		print(img.shape)
+		t_model = self.transformer()
+		out = t_model.call(img)
 		print(out.shape)
 		for layer in self.head:
 		    out = layer(out)
