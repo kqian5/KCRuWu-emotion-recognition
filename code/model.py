@@ -65,16 +65,20 @@ class Model(tf.keras.Model):
 
 	def call(self, img):
 		""" Passes input image through the network. """
+		print(img.shape)
 		vanilla_out = img
 		for layer in self.vanilla:
 			vanilla_out = layer(vanilla_out)
 		localization_out = img
 		for layer in self.localization:
 		    localization_out = layer(localization_out)
+
+		localization_out = tf.reshape(localization_out, shape = (-1, 2, 3))
+		print(localization_out)
 		# out = transformer(tf.reshape(img, shape=(32, 48, 48, 1)), tf.reshape(localization_out, shape=(-1, 6)))
-		affine_transformation_layer = self.affine(img, tf.reshape(localization_out, shape = (-1, 2, 3)))
+		affine_transformation_layer = self.affine(img, localization_out)
 		print(affine_transformation_layer.shape)
-		# transformed_vanilla = affine_transformation_layer(vanilla_out)
+		transformed_vanilla = affine_transformation_layer(vanilla_out)
 
 		for layer in self.head:
 		    transformed_vanilla = layer(transformed_vanilla)
