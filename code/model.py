@@ -11,7 +11,6 @@ from tensorflow.keras.layers import \
 from AffineLayer import AffineLayer
 from SpatialTransformLayer import DefaultLocalizationNetwork
 from SpatialTransformLayer import SpatialTransformLayer
-from transformer import spatial_transformer_network as transformer
 
 
 class Model(tf.keras.Model):
