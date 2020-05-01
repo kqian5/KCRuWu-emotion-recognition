@@ -8,9 +8,6 @@ import tensorflow as tf
 import hyperparameters as hp
 from tensorflow.keras.layers import \
 	Conv2D, MaxPool2D, Dropout, Flatten, Dense, ReLU, Multiply
-from AffineLayer import AffineLayer
-from transformer import spatial_transformer_network
-from tensorlayer.layers import transformer
 
 
 class Model(tf.keras.Model):
@@ -35,8 +32,8 @@ class Model(tf.keras.Model):
 			MaxPool2D(2),
 			ReLU(),
 
-			Conv2D(32, 3, 1, padding='same', activation="relu"),
-			Conv2D(32, 3, 1, padding='same'),
+			Conv2D(64, 3, 1, padding='same', activation="relu"),
+			Conv2D(64, 3, 1, padding='same'),
 			MaxPool2D(2),
 			ReLU(),
 
@@ -44,7 +41,7 @@ class Model(tf.keras.Model):
 
 			Flatten(),
 
-			Dense(50),
+			Dense(50, activation='relu'),
 			Dense(7, activation="softmax")
 		]
 
