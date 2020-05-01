@@ -29,7 +29,7 @@ batch_size = 10
 # learning_rate is a critical parameter that can dramatically affect
 # whether training succeeds or fails. For most of the experiments in this
 # project the default learning rate is safe.
-learning_rate = 1e-4
+learning_rate = 1e-3
 
 # Momentum on the gradient (if you use a momentum-based optimizer)
 momentum = 0.01
