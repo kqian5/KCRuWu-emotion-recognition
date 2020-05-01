@@ -74,7 +74,8 @@ class AffineLayer(tf.keras.layers.Layer):
         # reshape output
         output = tf.keras.layers.Reshape((input_shape[1] // self.downsample_factor, input_shape[2] // self.downsample_factor, input_shape[3]))(output);
         print("affinelayer")
-        print(input_shape)
+        print(input_shape[1])
+        print(input_shape[2])
         print(output.shape)
         return output;
 
