@@ -66,7 +66,7 @@ class Model(tf.keras.Model):
 			# insert localization network here
 			Flatten(),
 
-			Dense(50),
+			Dense(50, input_shape=(1, )),
 			Dense(7, activation="softmax")
 		]
 
