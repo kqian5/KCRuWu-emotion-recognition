@@ -97,8 +97,8 @@ def test(model, datasets):
     )
     print('test loss, test acc:', results)
 
-def predict(model, datasets):
-    print(datasets.test_x.shape)
+def prediction_visualization(model, datasets):
+    
     indices = np.random.randint(low=0, high=len(datasets.test_x)-1, size=10)
     inputs = datasets.test_x[indices]
     
@@ -112,8 +112,6 @@ def predict(model, datasets):
     print(np.sum(labels == predictions))
     
     visualize(inputs, predictions, labels)
-
-def visualize(inputs, predictions, labels):
 
     id_to_emotion = {
         0:'Angry',
@@ -146,7 +144,6 @@ def live(model):
         # print(downsample.shape)
         # display = np.concatenate((gray, downsample), axis=1)
         # Display the resulting frame
-        
 
         id_to_emotion = {
             0:'Angry',
@@ -193,7 +190,7 @@ def main():
     model = Model()
     
     # Different model input size depending on the dataset. Default is fer2013.
-    if ARGS.data is 'fer':
+    if ARGS.data == 'fer':
         model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 1)))
 
     checkpoint_path = "./your_model_checkpoints/"
@@ -217,7 +214,7 @@ def main():
     if ARGS.live:
         live(model)
     test(model, datasets)
-    # predict(model, datasets)
+    # prediction_visualization(model, datasets)
 
 # Make arguments global
 ARGS = parse_args()
