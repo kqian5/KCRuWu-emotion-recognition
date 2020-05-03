@@ -38,6 +38,10 @@ class Datasets():
             x, y = np.array(x), np.array(y).reshape((-1, 1))
             # standardize
             x = (x - mean) / std
+            # shuffle
+            ind = np.arange(x.shape[0])
+            np.random.shuffle(ind)
+            x, y = x[ind], y[ind]
             # split up data into train/val/test
             train_x, val_x, test_x = np.split(x, [int(0.8 * num_examples), int(0.9 * num_examples)])
             train_y, val_y, test_y = np.split(y, [int(0.8 * num_examples), int(0.9 * num_examples)])
@@ -89,7 +93,7 @@ class Datasets():
                         }
         
         # Get train_x, train_y, val_x, val_y, test_x, test_y
-        datasets = get_data_dict[task](data_path, 0.5)
+        datasets = get_data_dict[task](data_path, 1)
         (self.train_x, self.train_y, self.val_x, self.val_y, self.test_x, self.test_y) = datasets
         print('preprocessing complete')
 
