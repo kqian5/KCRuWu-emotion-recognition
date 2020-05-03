@@ -18,7 +18,7 @@ class Model(tf.keras.Model):
 		# we can adjust these filter numbers
 
 		self.architecture = [
-			Conv2D(32, 3, 1, data_format='channels_first', padding='same', activation="relu"),
+			Conv2D(32, 3, 1, padding='same', activation="relu"),
 			Conv2D(32, 3, 1, padding='same'),
 			MaxPool2D(2),
 			ReLU(),

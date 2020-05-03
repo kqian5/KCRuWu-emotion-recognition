@@ -4,11 +4,6 @@ img_size = 48
 # The number of emotions (0=Angry, 1=Disgust, 2=Fear, 3=Happy, 4=Sad, 5=Surprise, 6=Neutral).
 category_num = 7
 
-# Sample size for calculating the mean and standard deviation of the
-# training data. This many images will be randomly seleted to be read
-# into memory temporarily.
-preprocess_sample_size = 400
-
 # Training parameters
 
 # num_epochs is the number of epochs. If you experiment with more
