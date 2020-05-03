@@ -28,11 +28,11 @@ class Model(tf.keras.Model):
 			MaxPool2D(2),
 			ReLU(),
 
-			Dropout(0.35),
+			Dropout(0.4),
 
 			Flatten(),
 
-			Dense(50, activation='relu'),
+			Dense(40, activation='relu'),
 			Dense(7, activation="softmax")
 		]
 
