@@ -184,7 +184,7 @@ def main():
     
     # Different model input size depending on the dataset. Default is fer2013.
     if ARGS.data == 'fer':
-        model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 1)))
+        model(tf.keras.Input(shape=(10, hp.img_size, hp.img_size)))
 
     checkpoint_path = "./your_model_checkpoints/"
     model.summary()
