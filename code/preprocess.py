@@ -66,8 +66,8 @@ class Datasets():
                     curr = []
                 augmented_pixels = np.flip(pixels, axis=1)
                 curr.append(augmented_pixels)
-                curr.append(emotion)
-                x.append(pixels)
+                y.append(emotion)
+                curr.append(pixels)
                 y.append(emotion)
             num_examples = csv_reader.line_num - 1
             mean /= num_examples
