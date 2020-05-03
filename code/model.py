@@ -18,21 +18,31 @@ class Model(tf.keras.Model):
 		# we can adjust these filter numbers
 
 		self.architecture = [
+			# Conv2D(32, 3, 1, padding='same', activation="relu"),
+			# Conv2D(32, 3, 1, padding='same'),
+			# MaxPool2D(2),
+			# ReLU(),
+
+			# Conv2D(64, 3, 1, padding='same', activation="relu"),
+			# Conv2D(64, 3, 1, padding='same'),
+			# MaxPool2D(2),
+			# ReLU(),
+
+			# Dropout(0.4),
+
+			# Flatten(),
+
+			# Dense(40, activation='relu'),
+			# Dense(7, activation="softmax")
+
+			# trying something...
 			Conv2D(32, 3, 1, padding='same', activation="relu"),
-			Conv2D(32, 3, 1, padding='same'),
 			MaxPool2D(2),
-			ReLU(),
-
 			Conv2D(64, 3, 1, padding='same', activation="relu"),
-			Conv2D(64, 3, 1, padding='same'),
 			MaxPool2D(2),
-			ReLU(),
-
-			Dropout(0.4),
-
 			Flatten(),
-
-			Dense(40, activation='relu'),
+			Dense(1024, activation='relu'),
+			Dropout(0.5),
 			Dense(7, activation="softmax")
 		]
 
