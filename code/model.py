@@ -32,7 +32,7 @@ class Model(tf.keras.Model):
 
 			Flatten(),
 
-			Dense(35, activation='relu'),
+			Dense(45, activation='relu'),
 			Dense(7, activation="softmax")
 		]
 
