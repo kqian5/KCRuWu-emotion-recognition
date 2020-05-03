@@ -9,12 +9,14 @@ class Datasets():
     """
 
     def get_fer_data(self, path, flip_prob):
+        # open csv file
         with open(path, 'r') as f:
             csv_reader = csv.reader(f)
             fields = next(csv_reader)
             x, y = [], []
             mean = 0
             std = 0
+            # loop through images
             for row in csv_reader:
                 emotion = int(row[0])
                 pixels = np.array(row[1].split(' ')).astype(np.float).reshape((hp.img_size, hp.img_size, 1))
@@ -33,7 +35,7 @@ class Datasets():
             num_examples = csv_reader.line_num - 1
             mean /= num_examples
             std /= num_examples
-            x, y = np.array(x), np.array(y).reshape((num_examples, 1))
+            x, y = np.array(x), np.array(y).reshape((-1, 1))
             # standardize
             x = (x - mean) / std
             # split up data into train/val/test
