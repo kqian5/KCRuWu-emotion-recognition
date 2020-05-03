@@ -23,8 +23,8 @@ class Model(tf.keras.Model):
 			MaxPool2D(2),
 			ReLU(),
 
-			Conv2D(24, 3, 1, padding='same', activation="relu"),
-			Conv2D(24, 3, 1, padding='same'),
+			Conv2D(48, 3, 1, padding='same', activation="relu"),
+			Conv2D(48, 3, 1, padding='same'),
 			MaxPool2D(2),
 			ReLU(),
 
