@@ -9,7 +9,7 @@ category_num = 7
 # num_epochs is the number of epochs. If you experiment with more
 # complex networks you might need to increase this. Likewise if you add
 # regularization that slows training.
-num_epochs = 50
+num_epochs = 100
 
 # batch_size defines the number of training examples per batch:
 # You don't need to modify this.
