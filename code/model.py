@@ -41,7 +41,7 @@ class Model(tf.keras.Model):
 			Conv2D(64, 3, 1, padding='same', activation="relu"),
 			MaxPool2D(2),
 			Flatten(),
-			Dense(1024, activation='relu'),
+			Dense(100, activation='relu'),
 			Dropout(0.5),
 			Dense(7, activation="softmax")
 		]
