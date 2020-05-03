@@ -1,9 +1,3 @@
-"""
-Project 4 - CNNs
-CS1430 - Computer Vision
-Brown University
-"""
-
 import tensorflow as tf
 import hyperparameters as hp
 from tensorflow.keras.layers import \
@@ -17,9 +11,6 @@ class Model(tf.keras.Model):
 		super(Model, self).__init__()
 
 		# Optimizer
-		# self.optimizer = tf.keras.optimizers.Adam(
-		#     learning_rate=hp.learning_rate,
-		#     momentum=hp.momentum)
 		self.optimizer = tf.keras.optimizers.Adam(
 			learning_rate=hp.learning_rate)
 

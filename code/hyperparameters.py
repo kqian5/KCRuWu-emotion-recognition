@@ -1,9 +1,3 @@
-"""
-Project 4 - CNNs
-CS1430 - Computer Vision
-Brown University
-"""
-
 # size of fer images
 img_size = 48
 

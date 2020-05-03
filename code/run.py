@@ -1,16 +1,10 @@
-"""
-Project 4 - CNNs
-CS1430 - Computer Vision
-Brown University
-"""
-
 import os
 import argparse
 import numpy as np
 import tensorflow as tf
 from model import Model
 import hyperparameters as hp
-from pp import Datasets
+from preprocess import Datasets
 from tensorboard_utils import ImageLabelingLogger, ConfusionMatrixLogger
 import matplotlib.pyplot as plt
 import cv2
@@ -75,7 +69,6 @@ def train(model, datasets, checkpoint_path):
     #     callback_list.append(ConfusionMatrixLogger(datasets))
 
     # Begin training
-    # print(datasets.train_x.shape)
     model.fit(
         x=datasets.train_x,
         y=datasets.train_y,
@@ -214,6 +207,7 @@ def main():
     if ARGS.live:
         live(model)
     test(model, datasets)
+
     # prediction_visualization(model, datasets)
 
 # Make arguments global

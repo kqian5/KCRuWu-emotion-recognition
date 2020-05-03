@@ -1,9 +1,3 @@
-"""
-Project 4 - CNNs
-CS1430 - Computer Vision
-Brown University
-"""
-
 import io
 import os
 import sklearn.metrics
