@@ -1,7 +1,7 @@
 import tensorflow as tf
 import hyperparameters as hp
 from tensorflow.keras.layers import \
-	Conv2D, MaxPool2D, Dropout, Flatten, Dense, ReLU, Multiply
+	Conv2D, MaxPool2D, Dropout, Flatten, Dense, ReLU, Multiply, BatchNormalization
 
 
 class Model(tf.keras.Model):
@@ -36,13 +36,59 @@ class Model(tf.keras.Model):
 			# Dense(7, activation="softmax")
 
 			# trying something...
-			Conv2D(32, 3, 1, padding='same', activation="relu"),
-			MaxPool2D(2),
+			# Conv2D(32, 3, 1, padding='same', activation="relu"),
+			# MaxPool2D(2),
+			# Conv2D(64, 3, 1, padding='same', activation="relu"),
+			# MaxPool2D(2),
+			# Flatten(),
+			# Dense(100, activation='relu'),
+			# Dropout(0.5),
+			# Dense(7, activation="softmax")
+
+			# trying something...
 			Conv2D(64, 3, 1, padding='same', activation="relu"),
+			Conv2D(64, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
 			MaxPool2D(2),
-			Flatten(),
-			Dense(100, activation='relu'),
 			Dropout(0.5),
+
+			Conv2D(128, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			Conv2D(128, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			Conv2D(128, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			MaxPool2D(2),
+			Dropout(0.5),
+
+			Conv2D(256, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			Conv2D(256, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			Conv2D(256, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			MaxPool2D(2),
+			Dropout(0.5),
+
+			Conv2D(512, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			Conv2D(512, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			Conv2D(512, 3, 1, padding='same', activation="relu"),
+			BatchNormalization(),
+			MaxPool2D(2),
+			Dropout(0.5),
+
+			Flatten(),
+			Dense(512, activation='relu'),
+			Dropout(0.5),
+			Dense(256, activation='relu'),
+			Dropout(0.5),
+			Dense(128, activation='relu'),
+			Dropout(0.5),
+			Dense(64, activation='relu'),
+			Dropout(0.5),
+
 			Dense(7, activation="softmax")
 		]
 
