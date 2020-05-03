@@ -18,13 +18,13 @@ class Model(tf.keras.Model):
 		# we can adjust these filter numbers
 
 		self.architecture = [
-			Conv2D(16, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same', activation="relu"),
-			Conv2D(16, 3, 1, padding='same'),
+			Conv2D(24, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same', activation="relu"),
+			Conv2D(24, 3, 1, padding='same'),
 			MaxPool2D(2),
 			ReLU(),
 
-			Conv2D(32, 3, 1, padding='same', activation="relu"),
-			Conv2D(32, 3, 1, padding='same'),
+			Conv2D(24, 3, 1, padding='same', activation="relu"),
+			Conv2D(24, 3, 1, padding='same'),
 			MaxPool2D(2),
 			ReLU(),
 
