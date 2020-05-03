@@ -28,7 +28,7 @@ class Model(tf.keras.Model):
 			MaxPool2D(2),
 			ReLU(),
 
-			Dropout(0.3),
+			Dropout(0.35),
 
 			Flatten(),
 
