@@ -74,7 +74,7 @@ def train(model, datasets, checkpoint_path):
         y=datasets.train_y,
         validation_data=(datasets.val_x, datasets.val_y),
         epochs=hp.num_epochs,
-        batch_size=None,
+        batch_size=64,
         callbacks=callback_list,
     )
 
