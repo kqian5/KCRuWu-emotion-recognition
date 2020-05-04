@@ -18,6 +18,7 @@ class Model(tf.keras.Model):
 		# we can adjust these filter numbers
 
 		self.architecture = [
+			# Original vanilla CNN
 			# Conv2D(32, 3, 1, padding='same', activation="relu"),
 			# Conv2D(32, 3, 1, padding='same'),
 			# MaxPool2D(2),
@@ -35,17 +36,7 @@ class Model(tf.keras.Model):
 			# Dense(40, activation='relu'),
 			# Dense(7, activation="softmax")
 
-			# trying something...
-			# Conv2D(32, 3, 1, padding='same', activation="relu"),
-			# MaxPool2D(2),
-			# Conv2D(64, 3, 1, padding='same', activation="relu"),
-			# MaxPool2D(2),
-			# Flatten(),
-			# Dense(100, activation='relu'),
-			# Dropout(0.5),
-			# Dense(7, activation="softmax")
-
-			# trying something...
+			# New more complex CNN (Accuracy ~60% after 100 epochs of training)
 			Conv2D(64, 3, 1, padding='same', activation="relu"),
 			Conv2D(64, 3, 1, padding='same', activation="relu"),
 			BatchNormalization(),
