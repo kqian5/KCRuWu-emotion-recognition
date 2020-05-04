@@ -133,7 +133,11 @@ def live(model):
 
         # Our operations on the frame come here
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #480 x 640
-        downsample = cv2.resize(gray, (48,48))
+
+        square = gray[:, 80:560]
+
+        downsample = cv2.resize(square, (48,48), interpolation = cv2.INTER_AREA)
+        
         # print(downsample.shape)
         # display = np.concatenate((gray, downsample), axis=1)
         # Display the resulting frame
