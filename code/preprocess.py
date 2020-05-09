@@ -47,43 +47,6 @@ class Datasets():
             train_y, val_y, test_y = np.split(y, [int(0.8 * num_examples), int(0.9 * num_examples)])
             return train_x, train_y, val_x, val_y, test_x, test_y
 
-        #         # open csv file
-        # with open(path, 'r') as f:
-        #     csv_reader = csv.reader(f)
-        #     fields = next(csv_reader)
-        #     x, y = [], []
-        #     mean = 0
-        #     std = 0
-        #     # loop through images
-        #     curr = []
-        #     for row in csv_reader:
-        #         emotion = int(row[0])
-        #         pixels = np.array(row[1].split(' ')).astype(np.float).reshape((hp.img_size, hp.img_size))
-        #         # normalize
-        #         pixels /= 255.0
-        #         # calculate mean and std
-        #         mean += np.mean(pixels)
-        #         std += np.std(pixels)
-        #         # augment - horizontal flip
-        #         if len(curr) == 10:
-        #             x.append(np.array(curr))
-        #             curr = []
-        #         augmented_pixels = np.flip(pixels, axis=1)
-        #         curr.append(augmented_pixels)
-        #         y.append(emotion)
-        #         curr.append(pixels)
-        #         y.append(emotion)
-        #     num_examples = csv_reader.line_num - 1
-        #     mean /= num_examples
-        #     std /= num_examples
-        #     x, y = np.array(x), np.array(y).reshape((-1, 1))
-        #     # standardize
-        #     x = (x - mean) / std
-        #     # split up data into train/val/test
-        #     train_x, val_x, test_x = np.split(x, [int(0.8 * num_examples), int(0.9 * num_examples)])
-        #     train_y, val_y, test_y = np.split(y, [int(0.8 * num_examples), int(0.9 * num_examples)])
-        #     return train_x, train_y, val_x, val_y, test_x, test_y
-
 
     def __init__(self, data_path, task):
 

@@ -1,3 +1,7 @@
+'''
+Implementation by kevinzakka https://github.com/kevinzakka/spatial-transformer-network
+'''
+
 import tensorflow as tf
 
 
