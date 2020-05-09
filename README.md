@@ -11,6 +11,6 @@ Our project idea is to build a neural network that detects and identifies emotio
 **Facial Expression Recognition 2013 (FER-2013)**: 35,685 48x48 pixel grayscale images of faces categorized by facial expressions of happiness, neutral, sadness, anger, surprise, disgust, and fear.
 
 ## Acknowledge
-[Research Paper](https://arxiv.org/pdf/1902.01019.pdf)
+[Deep-Emotion: Facial Expression RecognitionUsing Attentional Convolutional Network](https://arxiv.org/pdf/1902.01019.pdf)
 
 [spatial-transformer-network](https://github.com/kevinzakka/spatial-transformer-network)
