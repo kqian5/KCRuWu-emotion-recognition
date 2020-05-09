@@ -43,6 +43,10 @@ def parse_args():
         '--live',
         action='store_true',
         help='''Live webcam feedback''')
+    parser.add_argument(
+        '--visualization',
+        action='store_true',
+        help='''Output prediction visualization of test data''')
 
     return parser.parse_args()
 
@@ -210,9 +214,10 @@ def main():
     
     if ARGS.live:
         live(model)
-    test(model, datasets)
+    if ARGS.visualization:
+        prediction_visualization(model, datasets)
 
-    # prediction_visualization(model, datasets)
+    test(model, datasets)
 
 # Make arguments global
 ARGS = parse_args()
