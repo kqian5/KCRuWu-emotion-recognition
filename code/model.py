@@ -88,8 +88,8 @@ class Model(tf.keras.Model):
 		# localization_out = img
 		# for layer in self.localization:
 		# 	localization_out = layer(localization_out)
-		# img = spatial_transformer_network(img, localization_out)
-		# img = tf.reshape(x, tf.shape(img))
+		# output = spatial_transformer_network(img, localization_out)
+		# img = tf.reshape(output, tf.shape(img))
 
 		'''
 		Apply CNN architecture
