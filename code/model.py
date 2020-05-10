@@ -66,17 +66,17 @@ class Model(tf.keras.Model):
 		]
 
 		# localizaiton network for attention
-		self.localization = [
-			Conv2D(32, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same'),
-			MaxPool2D(2),
-			ReLU(),
+		# self.localization = [
+		# 	Conv2D(32, 3, 1, input_shape=(hp.img_size, hp.img_size, 1), padding='same'),
+		# 	MaxPool2D(2),
+		# 	ReLU(),
 
-			Conv2D(32, 3, 1, padding='same'),
-			MaxPool2D(2),
-			ReLU(),
-			Dense(32, activation='relu'),
-			Dense(32),
-		]
+		# 	Conv2D(32, 3, 1, padding='same'),
+		# 	MaxPool2D(2),
+		# 	ReLU(),
+		# 	Dense(32, activation='relu'),
+		# 	Dense(32),
+		# ]
 
 
 	def call(self, img):
@@ -88,8 +88,8 @@ class Model(tf.keras.Model):
 		# localization_out = img
 		# for layer in self.localization:
 		# 	localization_out = layer(localization_out)
-		# output = spatial_transformer_network(img, localization_out)
-		# img = tf.reshape(output, tf.shape(img))
+		# img = spatial_transformer_network(img, localization_out)
+		# img = tf.reshape(x, tf.shape(img))
 
 		'''
 		Apply CNN architecture
