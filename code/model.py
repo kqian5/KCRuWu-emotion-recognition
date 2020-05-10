@@ -2,6 +2,7 @@ import tensorflow as tf
 import hyperparameters as hp
 from tensorflow.keras.layers import \
 	Conv2D, MaxPool2D, Dropout, Flatten, Dense, ReLU, Multiply, BatchNormalization
+from tensorflow.keras import regularizers
 from transformer import spatial_transformer_network
 
 
@@ -24,44 +25,44 @@ class Model(tf.keras.Model):
 			MaxPool2D(2),
 			Dropout(0.5),
 
-			Conv2D(128, 3, 1, padding='same', activation="relu"),
+			Conv2D(128, 3, 1, padding='same', activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			BatchNormalization(),
-			Conv2D(128, 3, 1, padding='same', activation="relu"),
+			Conv2D(128, 3, 1, padding='same', activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			BatchNormalization(),
-			Conv2D(128, 3, 1, padding='same', activation="relu"),
-			BatchNormalization(),
+			# Conv2D(128, 3, 1, padding='same', activation="relu"),
+			# BatchNormalization(),
 			MaxPool2D(2),
 			Dropout(0.5),
 
-			Conv2D(256, 3, 1, padding='same', activation="relu"),
+			Conv2D(256, 3, 1, padding='same', activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			BatchNormalization(),
-			Conv2D(256, 3, 1, padding='same', activation="relu"),
+			Conv2D(256, 3, 1, padding='same', activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			BatchNormalization(),
-			Conv2D(256, 3, 1, padding='same', activation="relu"),
-			BatchNormalization(),
+			# Conv2D(256, 3, 1, padding='same', activation="relu"),
+			# BatchNormalization(),
 			MaxPool2D(2),
 			Dropout(0.5),
 
-			Conv2D(512, 3, 1, padding='same', activation="relu"),
+			Conv2D(512, 3, 1, padding='same', activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			BatchNormalization(),
-			Conv2D(512, 3, 1, padding='same', activation="relu"),
+			Conv2D(512, 3, 1, padding='same', activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			BatchNormalization(),
-			Conv2D(512, 3, 1, padding='same', activation="relu"),
-			BatchNormalization(),
+			# Conv2D(512, 3, 1, padding='same', activation="relu"),
+			# BatchNormalization(),
 			MaxPool2D(2),
 			Dropout(0.5),
 
 			Flatten(),
-			Dense(512, activation='relu'),
+			Dense(512, activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			Dropout(0.5),
-			Dense(256, activation='relu'),
+			Dense(256, activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			Dropout(0.5),
-			Dense(128, activation='relu'),
+			Dense(128, activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			Dropout(0.5),
-			Dense(64, activation='relu'),
+			Dense(64, activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 			Dropout(0.5),
 
-			Dense(7, activation="softmax")
+			Dense(7, activation="softmax", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4), bias_regularizer=regularizers.l2(1e-4), activity_regularizer=regularizers.l2(1e-5)),
 		]
 
 		# localizaiton network for attention
