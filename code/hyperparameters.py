@@ -13,7 +13,7 @@ num_epochs = 100
 
 # batch_size defines the number of training examples per batch:
 # You don't need to modify this.
-batch_size = 10
+batch_size = 64
 
 # learning_rate is a critical parameter that can dramatically affect
 # whether training succeeds or fails. For most of the experiments in this
